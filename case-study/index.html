@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Study — How Novex Exterior Gets Instant Quotes with AI | SiteWise Agency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #2563EB;
+      --blue-dark: #1D4ED8;
+      --blue-light: #3B82F6;
+      --blue-50: #EFF6FF;
+      --blue-100: #DBEAFE;
+      --navy: #0F172A;
+      --slate-900: #0F172A;
+      --slate-800: #1E293B;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748B;
+      --slate-400: #94A3B8;
+      --slate-300: #CBD5E1;
+      --slate-200: #E2E8F0;
+      --slate-100: #F1F5F9;
+      --slate-50: #F8FAFC;
+      --white: #FFFFFF;
+      --green: #10B981;
+      --green-50: #ECFDF5;
+      --green-100: #D1FAE5;
+      --green-600: #059669;
+      --green-700: #047857;
+      --amber: #F59E0B;
+      --amber-50: #FFFBEB;
+      --red-50: #FEF2F2;
+      --red-600: #DC2626;
+      --font: 'Inter', system-ui, -apple-system, sans-serif;
+      --container: 1100px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font); color: var(--slate-800); background: var(--white); }
+
+    /* ── NAV ── */
+    .nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--slate-200);
+      padding: 16px 0;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-inner {
+      max-width: var(--container);
+      margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-brand-icon {
+      width: 36px; height: 36px; background: var(--blue);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    }
+    .nav-brand-icon svg { width: 20px; height: 20px; }
+    .nav-brand-text { font-size: 20px; font-weight: 700; color: var(--slate-900); }
+    .nav-links { display: flex; gap: 24px; align-items: center; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--slate-600); text-decoration: none; }
+    .nav-links a:hover { color: var(--blue); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 22px; border-radius: 10px; font-weight: 600;
+      font-size: 15px; text-decoration: none; transition: all .2s;
+      border: none; cursor: pointer; font-family: var(--font);
+    }
+    .btn-primary { background: var(--blue); color: var(--white); }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(37,99,235,.3); }
+    .btn-outline { background: transparent; color: var(--blue); border: 2px solid var(--blue); }
+    .btn-outline:hover { background: var(--blue-50); }
+    .btn-lg { padding: 14px 32px; font-size: 17px; border-radius: 12px; }
+    .btn-white { background: var(--white); color: var(--blue); }
+    .btn-white:hover { background: var(--slate-50); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--slate-900) 0%, #162033 50%, var(--slate-800) 100%);
+      padding: 80px 24px 100px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -200px; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(37,99,235,.12) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -200px; left: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(16,185,129,.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero-inner {
+      max-width: var(--container); margin: 0 auto;
+      position: relative; text-align: center;
+    }
+    .hero-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(37,99,235,.12); color: var(--blue-light);
+      padding: 6px 18px; border-radius: 100px; font-size: 13px; font-weight: 600;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 52px); font-weight: 900;
+      color: var(--white); line-height: 1.15; margin-bottom: 20px;
+      max-width: 800px; margin-left: auto; margin-right: auto;
+    }
+    .hero h1 span { color: var(--green); }
+    .hero p {
+      font-size: 18px; color: var(--slate-400); line-height: 1.7;
+      max-width: 600px; margin: 0 auto 40px;
+    }
+    .hero-stats {
+      display: flex; gap: 48px; justify-content: center;
+      margin-top: 56px; flex-wrap: wrap;
+    }
+    .hero-stat-num { font-size: 36px; font-weight: 900; color: var(--white); }
+    .hero-stat-label { font-size: 14px; color: var(--slate-500); margin-top: 4px; }
+
+    /* ── SECTION ── */
+    .section { padding: 80px 24px; }
+    .section-inner { max-width: var(--container); margin: 0 auto; }
+    .section-label {
+      font-size: 13px; font-weight: 700; color: var(--blue);
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(26px, 3.5vw, 36px); font-weight: 800;
+      color: var(--slate-900); line-height: 1.25; margin-bottom: 16px;
+    }
+    .section-desc {
+      font-size: 17px; color: var(--slate-500); line-height: 1.7; max-width: 600px;
+    }
+    .section-alt { background: var(--slate-50); }
+
+    /* ── PROBLEM/SOLUTION ── */
+    .ps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px; }
+    .ps-card {
+      border-radius: 16px; padding: 36px;
+      border: 1px solid var(--slate-200);
+    }
+    .ps-card.problem { background: var(--red-50); border-color: #FECACA; }
+    .ps-card.solution { background: var(--green-50); border-color: #A7F3D0; }
+    .ps-card-label {
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; margin-bottom: 16px;
+    }
+    .ps-card.problem .ps-card-label { color: var(--red-600); }
+    .ps-card.solution .ps-card-label { color: var(--green-600); }
+    .ps-card h3 { font-size: 20px; font-weight: 700; color: var(--slate-900); margin-bottom: 16px; }
+    .ps-card ul { list-style: none; }
+    .ps-card li {
+      font-size: 15px; color: var(--slate-600); line-height: 1.6;
+      padding: 6px 0; padding-left: 28px; position: relative;
+    }
+    .ps-card.problem li::before { content: '✗'; position: absolute; left: 0; color: var(--red-600); font-weight: 700; }
+    .ps-card.solution li::before { content: '✓'; position: absolute; left: 0; color: var(--green-600); font-weight: 700; }
+
+    /* ── TIMELINE ── */
+    .timeline { margin-top: 48px; }
+    .timeline-item {
+      display: grid; grid-template-columns: 80px 1fr; gap: 24px;
+      padding: 32px 0; border-bottom: 1px solid var(--slate-200);
+      align-items: start;
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-num {
+      width: 56px; height: 56px; border-radius: 14px;
+      background: var(--blue-50); color: var(--blue);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; font-weight: 800;
+    }
+    .timeline-content h3 { font-size: 18px; font-weight: 700; color: var(--slate-900); margin-bottom: 8px; }
+    .timeline-content p { font-size: 15px; color: var(--slate-500); line-height: 1.7; }
+
+    /* ── BROWSER MOCKUP ── */
+    .browser-wrap { margin-top: 48px; }
+    .browser {
+      background: var(--slate-900); border-radius: 16px;
+      overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,.15);
+      border: 1px solid var(--slate-200);
+    }
+    .browser-bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 14px 18px; background: var(--slate-800);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .browser-dot.r { background: #FF5F57; }
+    .browser-dot.y { background: #FFBD2E; }
+    .browser-dot.g { background: #28CA41; }
+    .browser-url {
+      flex: 1; margin-left: 12px;
+      background: rgba(255,255,255,.08); border-radius: 6px;
+      padding: 7px 14px; font-size: 13px; color: var(--slate-400);
+    }
+    .browser-body { position: relative; }
+    .browser-body img {
+      width: 100%; display: block;
+    }
+    /* Simulated screenshot via styled HTML */
+    .mock-site {
+      padding: 48px 40px; background: linear-gradient(180deg, #0a1628 0%, #111d30 100%);
+      min-height: 400px;
+    }
+    .mock-site-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 48px;
+    }
+    .mock-logo-text { color: var(--white); font-size: 18px; font-weight: 700; }
+    .mock-nav-pills { display: flex; gap: 16px; }
+    .mock-nav-pill { color: var(--slate-400); font-size: 13px; }
+    .mock-site-hero { text-align: center; }
+    .mock-site-hero h2 {
+      font-size: 32px; font-weight: 800; color: var(--white);
+      margin-bottom: 12px; line-height: 1.2;
+    }
+    .mock-site-hero p { color: var(--slate-400); font-size: 15px; margin-bottom: 24px; }
+    .mock-cta-btn {
+      display: inline-block; background: #16a34a; color: white;
+      padding: 12px 28px; border-radius: 10px; font-size: 15px; font-weight: 600;
+    }
+    .mock-services-row {
+      display: flex; gap: 12px; justify-content: center; margin-top: 32px;
+    }
+    .mock-service-chip {
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 10px; padding: 14px 20px; text-align: center;
+    }
+    .mock-service-chip-icon { font-size: 28px; margin-bottom: 4px; }
+    .mock-service-chip-name { color: var(--slate-400); font-size: 12px; font-weight: 500; }
+
+    /* ── RESULTS GRID ── */
+    .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .result-card {
+      background: var(--white); border: 1px solid var(--slate-200);
+      border-radius: 16px; padding: 32px; text-align: center;
+    }
+    .result-card-icon { font-size: 36px; margin-bottom: 12px; }
+    .result-card-num { font-size: 32px; font-weight: 900; color: var(--slate-900); margin-bottom: 4px; }
+    .result-card-label { font-size: 14px; color: var(--slate-500); }
+    .result-card-sub { font-size: 12px; color: var(--green-600); font-weight: 600; margin-top: 4px; }
+
+    /* ── QUOTE DEMO ── */
+    .quote-flow {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+      align-items: center; margin-top: 48px;
+    }
+    .quote-steps { }
+    .quote-step {
+      display: flex; gap: 16px; margin-bottom: 24px;
+      padding: 20px; border-radius: 12px; border: 1px solid var(--slate-200);
+      background: var(--white);
+    }
+    .quote-step-num {
+      width: 36px; height: 36px; min-width: 36px; border-radius: 10px;
+      background: var(--blue); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 700;
+    }
+    .quote-step h4 { font-size: 15px; font-weight: 700; color: var(--slate-900); margin-bottom: 4px; }
+    .quote-step p { font-size: 14px; color: var(--slate-500); line-height: 1.5; }
+    .quote-mock {
+      background: var(--white); border: 1px solid var(--slate-200);
+      border-radius: 16px; padding: 28px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.06);
+    }
+    .quote-mock-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; }
+    .quote-mock-field {
+      margin-bottom: 12px;
+    }
+    .quote-mock-label { font-size: 12px; font-weight: 600; color: var(--slate-500); margin-bottom: 4px; }
+    .quote-mock-input {
+      width: 100%; padding: 10px 14px; border-radius: 8px;
+      border: 1px solid var(--slate-300); font-size: 14px;
+      color: var(--slate-600); background: var(--slate-50);
+    }
+    .quote-mock-result {
+      background: var(--green-50); border: 1px solid #A7F3D0;
+      border-radius: 12px; padding: 16px; margin-top: 16px; text-align: center;
+    }
+    .quote-mock-price { font-size: 28px; font-weight: 900; color: var(--green-700); }
+    .quote-mock-note { font-size: 12px; color: var(--green-600); margin-top: 2px; }
+
+    /* ── TESTIMONIAL ── */
+    .testimonial {
+      background: var(--blue); border-radius: 20px; padding: 56px;
+      text-align: center; margin-top: 48px;
+    }
+    .testimonial-quote {
+      font-size: clamp(18px, 2.5vw, 24px); color: var(--white);
+      font-weight: 500; line-height: 1.7; max-width: 700px;
+      margin: 0 auto 24px; font-style: italic;
+    }
+    .testimonial-author { font-size: 15px; color: rgba(255,255,255,.7); }
+    .testimonial-author strong { color: var(--white); }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--slate-900) 0%, #162033 100%);
+      padding: 80px 24px; text-align: center;
+    }
+    .cta-section h2 {
+      font-size: clamp(28px, 4vw, 40px); font-weight: 800;
+      color: var(--white); margin-bottom: 16px;
+    }
+    .cta-section p {
+      font-size: 18px; color: var(--slate-400); margin-bottom: 32px;
+      max-width: 550px; margin-left: auto; margin-right: auto;
+    }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--slate-900); padding: 32px 24px;
+      text-align: center; color: var(--slate-500); font-size: 14px;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+    .footer a { color: var(--slate-400); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .ps-grid { grid-template-columns: 1fr; }
+      .results-grid { grid-template-columns: 1fr; }
+      .quote-flow { grid-template-columns: 1fr; }
+      .hero-stats { gap: 24px; }
+      .mock-services-row { flex-wrap: wrap; }
+      .testimonial { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/sitewise-mockups/demo/" class="nav-brand">
+      <div class="nav-brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round">
+          <rect x="3" y="13" width="4" height="8" rx="1"/>
+          <rect x="10" y="9" width="4" height="12" rx="1"/>
+          <rect x="17" y="5" width="4" height="16" rx="1"/>
+        </svg>
+      </div>
+      <span class="nav-brand-text">SiteWise</span>
+    </a>
+    <div class="nav-links">
+      <a href="/sitewise-mockups/demo/">Demo Site</a>
+      <a href="mailto:sitewiseagency@outlook.com" class="btn btn-primary">Get in Touch →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">📋 Client Case Study</div>
+    <h1>How Novex Exterior lets customers <span>quote and book instantly</span> — even at midnight</h1>
+    <p>A Calgary landscaping &amp; window washing company went from phone-only quotes to AI-powered instant pricing. Here's exactly how it works and what it's done for the business.</p>
+    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <a href="https://novexexterior.com" target="_blank" class="btn btn-primary btn-lg">Visit Novex Exterior →</a>
+      <a href="https://novexexterior.com/quote" target="_blank" class="btn btn-outline btn-lg" style="color: white; border-color: rgba(255,255,255,.3);">Try the Quote System</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">~30s</div>
+        <div class="hero-stat-label">Average time to quote</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">24/7</div>
+        <div class="hero-stat-label">Online booking</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">4</div>
+        <div class="hero-stat-label">Services offered</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">$0</div>
+        <div class="hero-stat-label">Cost per quote</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- The Problem / The Solution -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">The Challenge</div>
+    <h2 class="section-title">What every trade business deals with</h2>
+    <p class="section-desc">Eli and Levi run Novex Exterior in Calgary — lawn mowing, window washing, gutter cleaning, and hedge trimming. Before their SiteWise website, this was the reality:</p>
+
+    <div class="ps-grid">
+      <div class="ps-card problem">
+        <div class="ps-card-label">❌ Before</div>
+        <h3>The old way of getting jobs</h3>
+        <ul>
+          <li>Missed calls from potential customers during jobs</li>
+          <li>Spending 15–20 minutes per quote doing manual estimates</li>
+          <li>Losing evening and weekend inquiries to competitors</li>
+          <li>No professional web presence — just word of mouth</li>
+          <li>"I'll get back to you with a price" — then forgetting</li>
+          <li>No way for customers to book without calling</li>
+        </ul>
+      </div>
+      <div class="ps-card solution">
+        <div class="ps-card-label">✅ After</div>
+        <h3>What changed with SiteWise</h3>
+        <ul>
+          <li>Customers get instant AI-powered quotes 24/7</li>
+          <li>Photos analyzed by AI — accurate pricing in seconds</li>
+          <li>Online booking with calendar availability</li>
+          <li>Professional site that ranks on Google for Calgary</li>
+          <li>Email notifications for every quote and booking</li>
+          <li>Customers can book at 11pm — no phone needed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- The Website -->
+<section class="section section-alt">
+  <div class="section-inner">
+    <div class="section-label">The Build</div>
+    <h2 class="section-title">A website that actually works for the business</h2>
+    <p class="section-desc">Not a brochure — a tool. Every page is designed to turn a visitor into a paying customer.</p>
+
+    <div class="browser-wrap">
+      <div class="browser">
+        <div class="browser-bar">
+          <div class="browser-dot r"></div>
+          <div class="browser-dot y"></div>
+          <div class="browser-dot g"></div>
+          <div class="browser-url">novexexterior.com</div>
+        </div>
+        <div class="browser-body">
+          <div class="mock-site">
+            <div class="mock-site-header">
+              <div class="mock-logo-text">🏡 Novex Exterior</div>
+              <div class="mock-nav-pills">
+                <span class="mock-nav-pill">Services</span>
+                <span class="mock-nav-pill">Quote</span>
+                <span class="mock-nav-pill">Book</span>
+              </div>
+            </div>
+            <div class="mock-site-hero">
+              <h2>Get Your Free Quote<br>in Seconds</h2>
+              <p>Instant AI-powered quotes for lawn mowing, window washing, gutter cleaning &amp; hedge trimming.</p>
+              <span class="mock-cta-btn">Get a Quote →</span>
+            </div>
+            <div class="mock-services-row">
+              <div class="mock-service-chip">
+                <div class="mock-service-chip-icon">🌿</div>
+                <div class="mock-service-chip-name">Lawn Mowing</div>
+              </div>
+              <div class="mock-service-chip">
+                <div class="mock-service-chip-icon">🪟</div>
+                <div class="mock-service-chip-name">Window Washing</div>
+              </div>
+              <div class="mock-service-chip">
+                <div class="mock-service-chip-icon">🍂</div>
+                <div class="mock-service-chip-name">Gutter Cleaning</div>
+              </div>
+              <div class="mock-service-chip">
+                <div class="mock-service-chip-icon">✂️</div>
+                <div class="mock-service-chip-name">Hedge Trimming</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How the Quote System Works -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">The AI Quote System</div>
+    <h2 class="section-title">Customer uploads a photo → gets a price in 30 seconds</h2>
+    <p class="section-desc">No more manual estimates. The AI analyzes the photo, measures what it sees, and applies real pricing rates. Here's the flow:</p>
+
+    <div class="quote-flow">
+      <div class="quote-steps">
+        <div class="quote-step">
+          <div class="quote-step-num">1</div>
+          <div>
+            <h4>Customer picks their services</h4>
+            <p>Lawn mowing, window washing, gutter cleaning, hedge trimming — select one or multiple.</p>
+          </div>
+        </div>
+        <div class="quote-step">
+          <div class="quote-step-num">2</div>
+          <div>
+            <h4>Enter address + upload a photo</h4>
+            <p>They snap a photo of their property. The address helps the AI estimate lot size for lawns.</p>
+          </div>
+        </div>
+        <div class="quote-step">
+          <div class="quote-step-num">3</div>
+          <div>
+            <h4>AI analyzes and quotes instantly</h4>
+            <p>Counts windows, measures lawn area, checks gutter condition — applies your exact pricing rates.</p>
+          </div>
+        </div>
+        <div class="quote-step">
+          <div class="quote-step-num">4</div>
+          <div>
+            <h4>Customer books on the spot</h4>
+            <p>Happy with the price? They pick a date and book — you get an email notification immediately.</p>
+          </div>
+        </div>
+      </div>
+      <div class="quote-mock">
+        <div class="quote-mock-title">⚡ Instant Quote Result</div>
+        <div class="quote-mock-field">
+          <div class="quote-mock-label">SERVICE</div>
+          <div class="quote-mock-input">🌿 Lawn Mowing</div>
+        </div>
+        <div class="quote-mock-field">
+          <div class="quote-mock-label">PROPERTY</div>
+          <div class="quote-mock-input">📍 123 Maple Dr, Calgary, AB</div>
+        </div>
+        <div class="quote-mock-field">
+          <div class="quote-mock-label">AI ANALYSIS</div>
+          <div class="quote-mock-input" style="font-size: 13px; line-height: 1.5;">Front lawn ~2,200 sq ft, moderate growth. Standard residential lot typical for the SW Calgary area.</div>
+        </div>
+        <div class="quote-mock-result">
+          <div class="quote-mock-price">$65</div>
+          <div class="quote-mock-note">Estimated price · Book now to lock it in</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What's Included -->
+<section class="section section-alt">
+  <div class="section-inner">
+    <div class="section-label">What We Built</div>
+    <h2 class="section-title">Everything included in the Novex website</h2>
+    <p class="section-desc">This isn't a template. Every piece is custom-built for how the business actually operates.</p>
+
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="result-card-icon">⚡</div>
+        <div class="result-card-num" style="font-size: 20px;">AI Quotes</div>
+        <div class="result-card-label">Photo-based instant pricing using real business rates</div>
+      </div>
+      <div class="result-card">
+        <div class="result-card-icon">📅</div>
+        <div class="result-card-num" style="font-size: 20px;">Online Booking</div>
+        <div class="result-card-label">Calendar with availability, automatic email notifications</div>
+      </div>
+      <div class="result-card">
+        <div class="result-card-icon">📱</div>
+        <div class="result-card-num" style="font-size: 20px;">Mobile-First</div>
+        <div class="result-card-label">Designed for phones first — where 70%+ of customers browse</div>
+      </div>
+      <div class="result-card">
+        <div class="result-card-icon">🔍</div>
+        <div class="result-card-num" style="font-size: 20px;">Local SEO</div>
+        <div class="result-card-label">Optimized to rank for "Calgary landscaping" and related terms</div>
+      </div>
+      <div class="result-card">
+        <div class="result-card-icon">📧</div>
+        <div class="result-card-num" style="font-size: 20px;">Email Alerts</div>
+        <div class="result-card-label">Instant notification for every booking request</div>
+      </div>
+      <div class="result-card">
+        <div class="result-card-icon">🛡️</div>
+        <div class="result-card-num" style="font-size: 20px;">Admin Panel</div>
+        <div class="result-card-label">Block dates, confirm bookings, manage availability</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonial -->
+<section class="section">
+  <div class="section-inner">
+    <div class="testimonial">
+      <div class="testimonial-quote">"We built this because we were tired of playing phone tag with customers and spending half an hour on quotes that went nowhere. Now the website does it in 30 seconds — and customers can book at 11pm when we're asleep."</div>
+      <div class="testimonial-author"><strong>Levi McCarthy</strong> · Co-founder, Novex Exterior · Calgary, AB</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Want this for your business?</h2>
+  <p>We build the same system — custom-fit to your services, your pricing, your city. The AI quote system comes included.</p>
+  <div class="cta-buttons">
+    <a href="mailto:sitewiseagency@outlook.com?subject=Interested in a SiteWise website" class="btn btn-primary btn-lg">Email Us →</a>
+    <a href="https://novexexterior.com/quote" target="_blank" class="btn btn-outline btn-lg" style="color: white; border-color: rgba(255,255,255,.3);">Try the Live Quote System</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<div class="footer">
+  <p>Built by <a href="mailto:sitewiseagency@outlook.com"><strong>SiteWise Agency</strong></a> · Calgary, AB · <a href="/sitewise-mockups/demo/">See Demo</a></p>
+</div>
+
+</body>
+</html>
