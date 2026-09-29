@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SiteWise Demo — See What Your Website Could Look Like</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #2563EB;
+      --blue-dark: #1D4ED8;
+      --blue-light: #3B82F6;
+      --blue-50: #EFF6FF;
+      --blue-100: #DBEAFE;
+      --navy: #0F172A;
+      --slate-900: #0F172A;
+      --slate-800: #1E293B;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748B;
+      --slate-400: #94A3B8;
+      --slate-300: #CBD5E1;
+      --slate-200: #E2E8F0;
+      --slate-100: #F1F5F9;
+      --slate-50: #F8FAFC;
+      --white: #FFFFFF;
+      --green: #10B981;
+      --green-light: #D1FAE5;
+      --amber: #F59E0B;
+      --font: 'Inter', system-ui, -apple-system, sans-serif;
+      --container: 1140px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font); color: var(--slate-800); background: var(--white); }
+
+    /* ── BANNER ── */
+    .sw-banner {
+      background: var(--blue);
+      color: var(--white);
+      text-align: center;
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .sw-banner a { color: var(--white); text-decoration: underline; font-weight: 600; }
+
+    /* ── NAV ── */
+    .nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--slate-200);
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-brand-icon {
+      width: 36px; height: 36px;
+      background: var(--blue);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-brand-icon svg { width: 20px; height: 20px; }
+    .nav-brand-text { font-size: 20px; font-weight: 700; color: var(--slate-900); }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { font-size: 15px; font-weight: 500; color: var(--slate-600); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--blue); }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 22px; border-radius: 10px; font-weight: 600;
+      font-size: 15px; text-decoration: none; transition: all .2s;
+      border: none; cursor: pointer; font-family: var(--font);
+    }
+    .btn-primary { background: var(--blue); color: var(--white); }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(37,99,235,.3); }
+    .btn-outline { background: transparent; color: var(--blue); border: 2px solid var(--blue); }
+    .btn-outline:hover { background: var(--blue-50); }
+    .btn-white { background: var(--white); color: var(--blue); }
+    .btn-white:hover { background: var(--slate-50); }
+    .btn-lg { padding: 14px 32px; font-size: 17px; border-radius: 12px; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--slate-900) 0%, var(--slate-800) 100%);
+      padding: 80px 24px 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -50%; right: -20%; width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(37,99,235,.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero-inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(37,99,235,.15); color: var(--blue-light);
+      padding: 6px 16px; border-radius: 100px; font-size: 13px; font-weight: 600;
+      margin-bottom: 24px; width: fit-content;
+    }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
+    .hero h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 800; color: var(--white); line-height: 1.1; margin-bottom: 20px; }
+    .hero h1 span { color: var(--blue-light); }
+    .hero p { font-size: 18px; color: var(--slate-400); line-height: 1.7; margin-bottom: 32px; max-width: 520px; }
+    .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-stat { display: flex; gap: 40px; margin-top: 40px; }
+    .hero-stat-item { }
+    .hero-stat-num { font-size: 28px; font-weight: 800; color: var(--white); }
+    .hero-stat-label { font-size: 13px; color: var(--slate-500); margin-top: 2px; }
+
+    /* Mock browser */
+    .hero-browser {
+      background: var(--slate-800);
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.1);
+      overflow: hidden;
+      box-shadow: 0 40px 80px rgba(0,0,0,.4);
+    }
+    .browser-bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,.05);
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    .browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .browser-dot.r { background: #FF5F57; }
+    .browser-dot.y { background: #FFBD2E; }
+    .browser-dot.g { background: #28CA41; }
+    .browser-url {
+      flex: 1; margin-left: 12px;
+      background: rgba(255,255,255,.08); border-radius: 6px;
+      padding: 6px 12px; font-size: 12px; color: var(--slate-400);
+    }
+    .browser-body { padding: 24px; }
+    .mock-hero-card {
+      background: linear-gradient(135deg, #1a3a5c, #0d2137);
+      border-radius: 12px; padding: 32px; margin-bottom: 16px;
+    }
+    .mock-hero-card h3 { color: var(--white); font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+    .mock-hero-card p { color: var(--slate-400); font-size: 13px; margin-bottom: 16px; }
+    .mock-btn { background: var(--blue); color: white; padding: 8px 20px; border-radius: 8px; font-size: 13px; font-weight: 600; display: inline-block; }
+    .mock-services { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .mock-service {
+      background: rgba(255,255,255,.05); border-radius: 8px;
+      padding: 12px; text-align: center;
+    }
+    .mock-service-icon { font-size: 24px; margin-bottom: 4px; }
+    .mock-service-name { font-size: 11px; color: var(--slate-400); font-weight: 500; }
+
+    /* ── SECTIONS ── */
+    .section { padding: 80px 24px; }
+    .section-inner { max-width: var(--container); margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 60px; }
+    .section-label {
+      font-size: 13px; font-weight: 700; color: var(--blue);
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px;
+    }
+    .section-title { font-size: clamp(28px, 4vw, 40px); font-weight: 800; color: var(--slate-900); line-height: 1.2; margin-bottom: 16px; }
+    .section-desc { font-size: 17px; color: var(--slate-500); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+    /* Features */
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all .3s;
+    }
+    .feature-card:hover { border-color: var(--blue); box-shadow: 0 8px 30px rgba(37,99,235,.1); transform: translateY(-2px); }
+    .feature-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--blue-50); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; font-size: 24px;
+    }
+    .feature-card h3 { font-size: 18px; font-weight: 700; color: var(--slate-900); margin-bottom: 10px; }
+    .feature-card p { font-size: 15px; color: var(--slate-500); line-height: 1.6; }
+
+    /* Quote demo */
+    .quote-section { background: var(--slate-50); }
+    .quote-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .quote-form-mock {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.06);
+      border: 1px solid var(--slate-200);
+    }
+    .quote-form-title { font-size: 20px; font-weight: 700; margin-bottom: 24px; color: var(--slate-900); }
+    .form-group { margin-bottom: 16px; }
+    .form-label { font-size: 13px; font-weight: 600; color: var(--slate-700); margin-bottom: 6px; display: block; }
+    .form-input {
+      width: 100%; padding: 10px 14px; border-radius: 8px;
+      border: 1px solid var(--slate-300); font-size: 14px; font-family: var(--font);
+      color: var(--slate-600); background: var(--slate-50);
+    }
+    .form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748B' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+    .quote-result {
+      background: var(--green-light); border-radius: 12px; padding: 20px; margin-top: 16px;
+      border: 1px solid #A7F3D0;
+    }
+    .quote-result-label { font-size: 13px; font-weight: 600; color: #065F46; margin-bottom: 4px; }
+    .quote-result-price { font-size: 32px; font-weight: 800; color: #047857; }
+    .quote-result-range { font-size: 14px; color: #065F46; }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .cta-section h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; color: var(--white); margin-bottom: 16px; }
+    .cta-section p { font-size: 18px; color: rgba(255,255,255,.8); margin-bottom: 32px; max-width: 550px; margin-left: auto; margin-right: auto; }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* Footer */
+    .footer {
+      background: var(--slate-900);
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--slate-500);
+      font-size: 14px;
+    }
+    .footer a { color: var(--slate-400); text-decoration: none; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-browser { display: none; }
+      .features-grid { grid-template-columns: 1fr; }
+      .quote-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hero-stat { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SiteWise Banner -->
+<div class="sw-banner">
+  🚀 This is a demo website built by <a href="mailto:sitewiseagency@outlook.com">SiteWise Agency</a> — we build sites like this for trade businesses across Canada
+</div>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <div class="nav-brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      </div>
+      <span class="nav-brand-text">ProClean Exteriors</span>
+    </a>
+    <div class="nav-links">
+      <a href="#">Services</a>
+      <a href="#">About</a>
+      <a href="#">Gallery</a>
+      <a href="#">Reviews</a>
+      <a href="#quote" class="btn btn-primary">Get a Quote →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        Booking online 24/7
+      </div>
+      <h1>Professional Exterior Services in <span>Your City</span></h1>
+      <p>Get an instant AI-powered quote in under 30 seconds. No phone calls, no waiting — just enter your job details and get a price range immediately.</p>
+      <div class="hero-buttons">
+        <a href="#quote" class="btn btn-primary btn-lg">Get Instant Quote →</a>
+        <a href="#" class="btn btn-outline btn-lg">Our Work</a>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-item">
+          <div class="hero-stat-num">500+</div>
+          <div class="hero-stat-label">Jobs completed</div>
+        </div>
+        <div class="hero-stat-item">
+          <div class="hero-stat-num">4.9★</div>
+          <div class="hero-stat-label">Google rating</div>
+        </div>
+        <div class="hero-stat-item">
+          <div class="hero-stat-num">24/7</div>
+          <div class="hero-stat-label">Online booking</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-browser">
+      <div class="browser-bar">
+        <div class="browser-dot r"></div>
+        <div class="browser-dot y"></div>
+        <div class="browser-dot g"></div>
+        <div class="browser-url">procleanexteriors.ca/quote</div>
+      </div>
+      <div class="browser-body">
+        <div class="mock-hero-card">
+          <h3>⚡ Get Your Quote in Seconds</h3>
+          <p>Our AI calculates your price based on property size, service type, and location.</p>
+          <span class="mock-btn">Start Quote →</span>
+        </div>
+        <div class="mock-services">
+          <div class="mock-service"><div class="mock-service-icon">🪟</div><div class="mock-service-name">Window Washing</div></div>
+          <div class="mock-service"><div class="mock-service-icon">🍂</div><div class="mock-service-name">Gutter Cleaning</div></div>
+          <div class="mock-service"><div class="mock-service-icon">💧</div><div class="mock-service-name">Pressure Washing</div></div>
+          <div class="mock-service"><div class="mock-service-icon">🌿</div><div class="mock-service-name">Lawn Mowing</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">What You Get</div>
+      <h2 class="section-title">Everything a trade business needs online</h2>
+      <p class="section-desc">A SiteWise website isn't just a brochure — it's a booking machine that works while you sleep.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>AI Instant Quotes</h3>
+        <p>Customers get a price range in seconds. No more phone tag or "I'll get back to you" — they see the price and book on the spot.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>Mobile-First Design</h3>
+        <p>70% of your customers find you on their phone. Every site we build looks and works perfectly on mobile, tablet, and desktop.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h3>Online Booking</h3>
+        <p>Customers pick a date and time that works for them. You get a notification. No back-and-forth scheduling.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3>Google-Ready SEO</h3>
+        <p>Show up when people in your city search for your services. We handle the technical stuff so Google finds you first.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⭐</div>
+        <h3>Review Integration</h3>
+        <p>Your Google reviews displayed front and center. Social proof that turns visitors into paying customers.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Lead Dashboard</h3>
+        <p>See every quote request, booking, and visitor in one place. Know exactly how your website is performing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quote Demo -->
+<section class="section quote-section" id="quote">
+  <div class="section-inner">
+    <div class="quote-grid">
+      <div>
+        <div class="section-label">Try It Yourself</div>
+        <h2 class="section-title">This is what your customers see</h2>
+        <p class="section-desc" style="margin: 0; margin-top: 16px;">An instant quote form that does the selling for you. The customer enters their job details, the AI calculates a price range based on your rates, and they can book immediately.</p>
+        <p class="section-desc" style="margin: 0; margin-top: 16px;">No more missed calls at 11pm. No more "I'll send you a quote tomorrow" and then forgetting. The website handles it.</p>
+        <div style="margin-top: 32px;">
+          <a href="https://novexexterior.com/quote" target="_blank" class="btn btn-primary btn-lg">Try the Live Quote System →</a>
+        </div>
+      </div>
+      <div class="quote-form-mock">
+        <div class="quote-form-title">⚡ Get Your Instant Quote</div>
+        <div class="form-group">
+          <label class="form-label">What service do you need?</label>
+          <select class="form-input form-select">
+            <option>Window Washing</option>
+            <option>Gutter Cleaning</option>
+            <option>Pressure Washing</option>
+            <option>Lawn Mowing</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Property type</label>
+          <select class="form-input form-select">
+            <option>Residential — Single storey</option>
+            <option>Residential — Two storey</option>
+            <option>Commercial</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Approximate square footage</label>
+          <input class="form-input" type="text" value="1,800 sq ft" readonly>
+        </div>
+        <div class="quote-result">
+          <div class="quote-result-label">Your estimated price</div>
+          <div class="quote-result-price">$180 – $240</div>
+          <div class="quote-result-range">Based on typical rates for this service and property size</div>
+        </div>
+        <div style="margin-top: 16px;">
+          <button class="btn btn-primary" style="width: 100%; justify-content: center;">Book This Service →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Want a website like this for your business?</h2>
+  <p>We build modern, conversion-focused websites for trade businesses across Canada. The AI quote system comes built in.</p>
+  <div class="cta-buttons">
+    <a href="mailto:sitewiseagency@outlook.com" class="btn btn-white btn-lg">Email Us →</a>
+    <a href="https://novexexterior.com/quote" target="_blank" class="btn btn-outline btn-lg" style="color: white; border-color: rgba(255,255,255,.4);">Try the Live Demo →</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<div class="footer">
+  <p>Built by <a href="mailto:sitewiseagency@outlook.com"><strong>SiteWise Agency</strong></a> · Calgary, AB · sitewiseagency@outlook.com</p>
+</div>
+
+</body>
+</html>
