@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- Icon: Abstract rising bars with arrow accent -->
+  <g transform="translate(12, 10)">
+    <!-- Bar 1 - shortest -->
+    <rect x="0" y="70" width="18" height="30" rx="4" fill="#2563EB" opacity="0.4"/>
+    <!-- Bar 2 -->
+    <rect x="24" y="48" width="18" height="52" rx="4" fill="#2563EB" opacity="0.6"/>
+    <!-- Bar 3 -->
+    <rect x="48" y="26" width="18" height="74" rx="4" fill="#2563EB" opacity="0.8"/>
+    <!-- Bar 4 - tallest -->
+    <rect x="72" y="4" width="18" height="96" rx="4" fill="#2563EB"/>
+    <!-- Upward arrow accent -->
+    <polygon points="81,-3 75,9 87,9" fill="#2563EB"/>
+  </g>
+</svg>
